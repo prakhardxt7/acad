@@ -1,4 +1,4 @@
-name: Build and deploy container app to Azure Web App - studentperformancecheck
+name: Build and deploy container app to Azure Web App - flask-stud-webapp
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'flask-stud-webapp'  # Corrected app name here
+        app-name: 'flask-stud-webapp' 
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_1fbf117736ee417e9fb28f9f53c3edad }}
         images: 'mlopacr.azurecr.io/mlops_final:latest'
