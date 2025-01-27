@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy container app to Azure Web App - studentperformancecheck
 
 on:
@@ -22,7 +19,7 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v1
       with:
-        registry: https://testdockerkrish.azurecr.io/
+        registry: https://mlopacr.azurecr.io/
         username: ${{ secrets.AzureAppService_ContainerUsername_7fe4218b75d44acd982fcba49ee541c7 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_d7568033888947cf97273dac9a37d852 }}
 
@@ -30,7 +27,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: testdockerkrish.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_7fe4218b75d44acd982fcba49ee541c7 }}/tudentperformance1:${{ github.sha }}
+        tags: mlopacr.azurecr.io/mlops_final:latest  # Updated to match your `az webapp create` command
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +45,4 @@ jobs:
         app-name: 'studentperformancecheck'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_1fbf117736ee417e9fb28f9f53c3edad }}
-        images: 'testdockerkrish.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_7fe4218b75d44acd982fcba49ee541c7 }}/tudentperformance1:${{ github.sha }}'
+        images: 'mlopacr.azurecr.io/mlops_final:latest'  # Updated to match the tag used in build
