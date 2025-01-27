@@ -27,7 +27,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: mlopacr.azurecr.io/mlops_final:latest  # Updated to match your `az webapp create` command
+        tags: mlopacr.azurecr.io/mlops_final:latest
         file: ./Dockerfile
 
   deploy:
@@ -42,7 +42,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'studentperformancecheck'
+        app-name: 'flask-stud-webapp'  # Corrected app name here
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_1fbf117736ee417e9fb28f9f53c3edad }}
-        images: 'mlopacr.azurecr.io/mlops_final:latest'  # Updated to match the tag used in build
+        images: 'mlopacr.azurecr.io/mlops_final:latest'
